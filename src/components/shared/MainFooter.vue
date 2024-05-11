@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import IconInstagram from '@icons/IconInstagram.vue'
 import IconEmail from '@icons/IconEmail.vue'
-import contact from '@/mocks/footer/contact'
+import contact from '@/mocks/contact'
 </script>
 
 <template>
