@@ -11,7 +11,7 @@ import contact from '@/mocks/contact'
       CAINFO - Unisinos
     </RouterLink>
 
-    <div class="container">
+    <div class="footer-container">
       <div class="contact">
         <IconEmail />
         <span>{{ contact.email }}</span>
@@ -50,7 +50,7 @@ footer {
     }
   }
 
-  .container {
+  .footer-container {
     margin: 20px 0 10px 0;
     font-size: 12px;
     color: #919191;

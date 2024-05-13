@@ -1,9 +1,16 @@
+<script setup lang="ts">
+import IconCart from '@icons/IconCart.vue'
+</script>
+
 <template>
   <header>
-    <RouterLink class="container" to="/">
+    <RouterLink class="logo-container" to="/">
       <img class="logo cainfo-logo" src="@assets/cainfo-logo.jpg" />
       <img class="logo unisinos-logo" src="@assets/unisinos-logo.png" />
     </RouterLink>
+    <div class="cart-container">
+      <IconCart />
+    </div>
   </header>
 </template>
 
@@ -14,11 +21,7 @@ header {
   display: flex;
   align-items: center;
 
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-
-  .container {
+  .logo-container {
     display: flex;
     align-items: center;
 
@@ -34,6 +37,17 @@ header {
     .unisinos-logo {
       width: 96px;
       height: 25px;
+    }
+  }
+
+  .cart-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
