@@ -6,6 +6,14 @@ import MainHeader from '@components/shared/MainHeader.vue'
 
 <template>
   <MainHeader />
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
   <MainFooter />
 </template>
+
+<style lang="scss">
+main {
+  margin: 20px;
+}
+</style>

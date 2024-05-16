@@ -1,5 +1,6 @@
 <script lang="ts">
-import { getFullName, handleValue, type DTOProduct } from '@/models/product'
+import { type DTOProduct } from '@/models/product'
+import productUtils from '@utils/product'
 export default {
   props: {
     product: {
@@ -9,42 +10,52 @@ export default {
   },
   data() {
     return {
-      displayValue: handleValue(this.product),
-      fullName: getFullName(this.product),
-      // TODO: Use image from product
-      thumbPhoto:
-        'https://res.cloudinary.com/dqhrdutte/image/upload/fl_preserve_transparency/v1715637419/white-1_tugwvy.jpg?_s=public-apps'
+      displayValue: productUtils.getDisplayValue(this.product),
+      fullName: productUtils.getNameAndGenre(this.product)
     }
   }
 }
 </script>
 
 <template>
-  <div class="card-container">
-    <img :src="thumbPhoto" />
+  <RouterLink
+    :to="{
+      name: 'product',
+      params: {
+        id: product.id
+      }
+    }"
+    v-bind:props="{ id: product.id }"
+    class="card-container"
+  >
+    <img :src="product.thumbPhoto" />
     <h2>{{ fullName }}</h2>
     <h3>{{ product.course }}</h3>
     <div class="value-container">
       <span>R${{ displayValue }}</span>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <style scoped lang="scss">
 .card-container {
   display: flex;
   flex-direction: column;
-  border: solid 1px #909090;
+  border: solid 1px var(--light-grey);
   border-radius: 4px;
   margin: 5px;
   padding: 10px;
   width: 280px;
+  text-decoration: none;
+  color: var(--black);
+  background-color: var(--white);
 
   &:hover {
     transform: scale(1.05);
     transition-duration: 500ms;
-    border-color: #fdae05;
+    border-color: var(--yellow);
     cursor: pointer;
+    z-index: 2;
   }
 
   img {
@@ -56,7 +67,7 @@ export default {
   }
 
   h3 {
-    color: #6d6d6e;
+    color: var(--dark-grey);
     font-weight: 500;
   }
 
@@ -64,7 +75,7 @@ export default {
     margin-top: auto;
 
     span {
-      color: #fdae05;
+      color: var(--yellow);
       font-weight: 900;
       font-size: 22px;
     }

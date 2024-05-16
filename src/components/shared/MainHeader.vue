@@ -5,7 +5,7 @@ import IconCart from '@icons/IconCart.vue'
 <template>
   <header>
     <RouterLink class="logo-container" to="/">
-      <img class="logo cainfo-logo" src="@assets/cainfo-logo.jpg" />
+      <img class="logo cainfo-logo" src="@assets/cainfo-logo.png" />
       <img class="logo unisinos-logo" src="@assets/unisinos-logo.png" />
     </RouterLink>
     <div class="cart-container">
@@ -17,7 +17,7 @@ import IconCart from '@icons/IconCart.vue'
 <style scoped lang="scss">
 header {
   width: 100%;
-  background-color: #000;
+  background-color: var(--black);
   display: flex;
   align-items: center;
 
