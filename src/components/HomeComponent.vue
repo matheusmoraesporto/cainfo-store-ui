@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { DTOProduct } from '@/models/product'
-import productSerice from '@service/product.service'
+import productService from '@service/product.service'
 import { onMounted, ref } from 'vue'
 import ProductCard from '@/components/ProductCard.vue'
 
@@ -13,7 +13,7 @@ export default {
     const products = ref([] as DTOProduct[])
 
     onMounted(async () => {
-      products.value = (await productSerice.listProducts()) as DTOProduct[]
+      products.value = (await productService.listProducts()) as DTOProduct[]
     })
 
     return {
