@@ -4,6 +4,7 @@ import productService from '@/service/product.service'
 import productUtils from '@utils/product'
 import { onMounted, ref } from 'vue'
 import SizeChart from '@components/SizeChart.vue'
+import { useCartStore } from '@store/CartStore'
 
 export default {
   components: {
@@ -64,6 +65,11 @@ export default {
     },
     selectSize(index: number): void {
       this.selectedSizeIndex = index
+    },
+    addToCart(): void {
+      const store = useCartStore()
+      // TODO: Alterar para o objeto correto
+      store.addItem(1)
     }
   }
 }
@@ -118,8 +124,12 @@ export default {
         </div>
       </div>
       <div class="buttons-container">
-        <button :disabled="!canBuyProduct" class="primary-button">{{ titleAddProduct }}</button>
-        <button :disabled="!canBuyProduct" class="secondary-button">{{ titleBuyProduct }}</button>
+        <button :disabled="!canBuyProduct" class="primary-button" @click="addToCart()">
+          {{ titleAddProduct }}
+        </button>
+        <button :disabled="!canBuyProduct" class="secondary-button">
+          {{ titleBuyProduct }}
+        </button>
       </div>
     </div>
   </div>

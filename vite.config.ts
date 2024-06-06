@@ -13,6 +13,7 @@ export default defineConfig({
       '@icons': fileURLToPath(new URL('./src/components/icons', import.meta.url)),
       '@models': fileURLToPath(new URL('./src/models', import.meta.url)),
       '@service': fileURLToPath(new URL('./src/service', import.meta.url)),
+      '@store': fileURLToPath(new URL('./src/store', import.meta.url)),
       '@utils': fileURLToPath(new URL('./src/utils', import.meta.url)),
       '@views': fileURLToPath(new URL('./src/views', import.meta.url))
     }

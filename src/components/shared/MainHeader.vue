@@ -1,5 +1,21 @@
-<script setup lang="ts">
+<script lang="ts">
 import IconCart from '@icons/IconCart.vue'
+import { useCartStore } from '@store/CartStore'
+export default {
+  components: {
+    IconCart
+  },
+  computed: {
+    isCartEmpty() {
+      const store = useCartStore()
+      return store.cart.length === 0
+    },
+    cartItems() {
+      const store = useCartStore()
+      return store.cart.length
+    }
+  }
+}
 </script>
 
 <template>
@@ -9,6 +25,9 @@ import IconCart from '@icons/IconCart.vue'
       <img class="logo unisinos-logo" src="@assets/unisinos-logo.png" />
     </RouterLink>
     <div class="cart-container">
+      <div v-if="!isCartEmpty" class="notification">
+        {{ cartItems }}
+      </div>
       <IconCart />
     </div>
   </header>
@@ -48,6 +67,20 @@ header {
 
     &:hover {
       cursor: pointer;
+    }
+
+    .notification {
+      background-color: var(--yellow);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      z-index: 2;
+      position: absolute;
+      font-weight: bold;
+      color: var(--white);
+      font-size: 10px;
+      display: flex;
+      justify-content: center;
     }
   }
 }

@@ -2,6 +2,10 @@
 import { RouterView } from 'vue-router'
 import MainFooter from '@components/shared/MainFooter.vue'
 import MainHeader from '@components/shared/MainHeader.vue'
+import { useCartStore } from '@store/CartStore'
+
+const store = useCartStore()
+store.loadItemsFromLocalStorage()
 </script>
 
 <template>
