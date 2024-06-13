@@ -4,16 +4,22 @@ import { ref } from 'vue'
 import IconCart from '@icons/IconCart.vue'
 import IconForm from '@icons/IconForm.vue'
 import IconMoney from '@icons/IconMoney.vue'
+import ItemsStep from './ItemsStep.vue'
+import FormStep from './FormStep.vue'
+import PaymentStep from './PaymentStep.vue'
 
 export default {
   components: {
+    FormStep,
     IconCart,
     IconForm,
-    IconMoney
+    IconMoney,
+    ItemsStep,
+    PaymentStep
   },
   setup() {
     const mainHeaderTitle = 'Finalize a sua compra'
-    const currentStep = ref(0)
+    const currentStep = ref('items')
     return {
       currentStep,
       mainHeaderTitle,
@@ -21,8 +27,8 @@ export default {
     }
   },
   methods: {
-    changeStep(index: number) {
-      this.currentStep = index
+    changeStep(stepId: string) {
+      this.currentStep = stepId
     },
     isItemsStep(stepId: string): boolean {
       return stepId === 'items'
@@ -43,10 +49,10 @@ export default {
     <div class="steps">
       <div
         class="step-container"
-        :class="{ current: index === currentStep }"
+        :class="{ current: step.id === currentStep }"
         v-for="(step, index) in steps"
         v-bind:key="index"
-        @click="changeStep(index)"
+        @click="changeStep(step.id)"
       >
         <div class="step-index">
           <IconCart v-if="isItemsStep(step.id)" :color="'--black'" />
@@ -56,21 +62,30 @@ export default {
         </div>
       </div>
     </div>
+    <div class="current-step-content">
+      <ItemsStep v-if="isItemsStep(currentStep)" />
+      <FormStep v-if="isFormStep(currentStep)" />
+      <PaymentStep v-if="isPaymentStep(currentStep)" />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 .purchase-container {
+  h2 {
+    margin-bottom: 10px;
+  }
+
   .steps {
     display: flex;
     align-items: center;
     text-align: center;
 
     .step-container {
+      height: 60px;
       width: 100%;
       cursor: pointer;
       display: flex;
-      // flex-direction: column;
       align-items: center;
       padding: 5px 10px 20px 5px;
       border: 1px solid var(--black);
