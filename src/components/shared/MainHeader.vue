@@ -29,7 +29,7 @@ export default {
         {{ cartItems }}
       </div>
       <RouterLink class="logo-container" to="/purchase">
-        <IconCart />
+        <IconCart :color="'--white'" />
       </RouterLink>
     </div>
   </header>
