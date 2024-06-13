@@ -28,7 +28,9 @@ export default {
       <div v-if="!isCartEmpty" class="notification">
         {{ cartItems }}
       </div>
-      <IconCart />
+      <RouterLink class="logo-container" to="/purchase">
+        <IconCart />
+      </RouterLink>
     </div>
   </header>
 </template>

@@ -4,17 +4,20 @@ import productService from '@/service/product.service'
 import productUtils from '@utils/product'
 import { onMounted, ref } from 'vue'
 import SizeChart from '@components/SizeChart.vue'
+import ToastMessage from '@components/shared/ToastMessage.vue'
 import { useCartStore } from '@store/CartStore'
 
 export default {
   components: {
-    SizeChart
+    SizeChart,
+    ToastMessage
   },
   props: {
     id: Number
   },
   setup({ id }) {
     const displayValue = ref('')
+    const hideToast = ref(true)
     const highlightedPhoto = ref('')
     const highlightedPhotoIndex = ref(0)
     const product = ref({} as DTOProduct)
@@ -25,6 +28,7 @@ export default {
     const titleBuyProduct = ref('Comprar item')
     const titleColorList = 'Escolha sua cor:'
     const titleSizeList = 'Escolha seu tamanho:'
+    const toastMessage = 'O item foi adicionado ao seu carrinho'
 
     onMounted(async () => {
       product.value = (await productService.getProduct(id as number)) as DTOProduct
@@ -35,6 +39,7 @@ export default {
 
     return {
       displayValue,
+      hideToast,
       highlightedPhoto,
       highlightedPhotoIndex,
       product,
@@ -44,7 +49,8 @@ export default {
       titleAddProduct,
       titleBuyProduct,
       titleColorList,
-      titleSizeList
+      titleSizeList,
+      toastMessage
     }
   },
   computed: {
@@ -70,6 +76,17 @@ export default {
       const store = useCartStore()
       // TODO: Alterar para o objeto correto
       store.addItem(1)
+      this.showToast()
+    },
+    buyItem(): void {
+      this.addToCart()
+      this.$router.push({ path: '/purchase' })
+    },
+    showToast(): void {
+      this.hideToast = false
+      setTimeout(() => {
+        this.hideToast = true
+      }, 3000)
     }
   }
 }
@@ -127,12 +144,13 @@ export default {
         <button :disabled="!canBuyProduct" class="primary-button" @click="addToCart()">
           {{ titleAddProduct }}
         </button>
-        <button :disabled="!canBuyProduct" class="secondary-button">
+        <button :disabled="!canBuyProduct" class="secondary-button" @click="buyItem()">
           {{ titleBuyProduct }}
         </button>
       </div>
     </div>
   </div>
+  <ToastMessage :hidden="hideToast" :message="toastMessage" />
 </template>
 
 <style lang="scss">

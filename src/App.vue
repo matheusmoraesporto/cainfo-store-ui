@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { useCartStore } from '@store/CartStore'
 import MainFooter from '@components/shared/MainFooter.vue'
 import MainHeader from '@components/shared/MainHeader.vue'
-import { useCartStore } from '@store/CartStore'
-
 const store = useCartStore()
 store.loadItemsFromLocalStorage()
 </script>
