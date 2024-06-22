@@ -10,7 +10,7 @@ export default {
   },
   data() {
     return {
-      displayValue: productUtils.getDisplayValue(this.product),
+      displayValue: productUtils.getDisplayValue(this.product.value),
       fullName: productUtils.getNameAndGenre(this.product)
     }
   }

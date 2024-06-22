@@ -6,6 +6,7 @@ import { onMounted, ref } from 'vue'
 import SizeChart from '@components/SizeChart.vue'
 import ToastMessage from '@components/shared/ToastMessage.vue'
 import { useCartStore } from '@store/CartStore'
+import type { CartItem } from '@/models/cart'
 
 export default {
   components: {
@@ -34,7 +35,7 @@ export default {
       product.value = (await productService.getProduct(id as number)) as DTOProduct
       title.value = productUtils.getFullName(product.value)
       highlightedPhoto.value = product.value.photos[0].url
-      displayValue.value = productUtils.getDisplayValue(product.value)
+      displayValue.value = productUtils.getDisplayValue(product.value.value)
     })
 
     return {
@@ -73,9 +74,19 @@ export default {
       this.selectedSizeIndex = index
     },
     addToCart(): void {
+      const { id, name, genre, course, value, sizes, colors } = this.product
+      const newCartItem: CartItem = {
+        id,
+        name,
+        genre,
+        course,
+        value,
+        amount: 1,
+        selectedColor: colors[this.selectedColorIndex],
+        selectedSize: sizes[this.selectedSizeIndex]
+      }
       const store = useCartStore()
-      // TODO: Alterar para o objeto correto
-      store.addItem(1)
+      store.addItem(newCartItem)
       this.showToast()
     },
     buyItem(): void {

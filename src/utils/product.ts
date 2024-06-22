@@ -6,8 +6,8 @@ const genreDescriptions: Record<string, string> = {
 }
 
 export default {
-  getDisplayValue(product: DTOProduct): string {
-    return product.value.toFixed(2).toString().replace('.', ',')
+  getDisplayValue(value: number): string {
+    return value.toFixed(2).toString().replace('.', ',')
   },
 
   getNameAndGenre(product: DTOProduct): string {

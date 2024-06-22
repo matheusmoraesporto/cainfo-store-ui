@@ -12,7 +12,28 @@ export const useCartStore = defineStore('cart', {
   },
   actions: {
     addItem(item: CartItem) {
-      this.cart.push(item)
+      let isDuplicated = false
+      for (let i = 0; i < this.cart.length; i++) {
+        const currentItem = this.cart[i]
+        const currentId = currentItem.id
+        const currentIdSize = currentItem.selectedSize.idSize
+        const currentIdColor = currentItem.selectedColor.idColor
+
+        if (
+          currentId === item.id &&
+          currentIdSize === item.selectedSize.idSize &&
+          currentIdColor === item.selectedColor.idColor
+        ) {
+          isDuplicated = true
+          this.cart[i].amount++
+          break
+        }
+      }
+
+      if (!isDuplicated) {
+        this.cart.push(item)
+      }
+
       this.updateCartItemsIntoLocalStorage()
     },
     loadItemsFromLocalStorage() {

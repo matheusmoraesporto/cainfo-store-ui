@@ -55,17 +55,17 @@ export default {
         @click="changeStep(step.id)"
       >
         <div class="step-index">
-          <IconCart v-if="isItemsStep(step.id)" :color="'--black'" />
-          <IconForm v-if="isFormStep(step.id)" />
-          <IconMoney v-if="isPaymentStep(step.id)" />
+          <IconCart v-show="isItemsStep(step.id)" :color="'--black'" />
+          <IconForm v-show="isFormStep(step.id)" />
+          <IconMoney v-show="isPaymentStep(step.id)" />
           {{ step.title }}
         </div>
       </div>
     </div>
     <div class="current-step-content">
-      <ItemsStep v-if="isItemsStep(currentStep)" />
-      <FormStep v-if="isFormStep(currentStep)" />
-      <PaymentStep v-if="isPaymentStep(currentStep)" />
+      <ItemsStep v-show="isItemsStep(currentStep)" />
+      <FormStep v-show="isFormStep(currentStep)" />
+      <PaymentStep v-show="isPaymentStep(currentStep)" />
     </div>
   </div>
 </template>

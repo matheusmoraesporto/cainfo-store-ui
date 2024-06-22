@@ -12,7 +12,9 @@ export default {
     },
     cartItems() {
       const store = useCartStore()
-      return store.cart.length
+      return store.cart.reduce((prev, curr) => {
+        return prev + curr.amount
+      }, 0)
     }
   }
 }
